@@ -74,13 +74,13 @@ body.menu-open::after {
 }
 
       /* Mobile Navigation Fix */
-/* Fullscreen Mobile Menu Overlay */
+/* ----- FULLSCREEN MOBILE MENU FIX ----- */
 @media (max-width: 820px) {
   nav {
     display: none;
     position: fixed;
-    inset: 0;
-    background: rgba(10, 10, 10, 0.98);
+    inset: 0; /* covers the full screen */
+    background: rgba(10, 10, 10, 0.97); /* dark overlay */
     backdrop-filter: blur(8px);
     flex-direction: column;
     justify-content: center;
@@ -99,9 +99,9 @@ body.menu-open::after {
 
   nav a {
     font-size: 20px;
-    color: var(--text);
     font-weight: 600;
-    margin: 12px 0;
+    color: var(--text);
+    margin: 14px 0;
     transition: color 0.3s ease;
   }
 
@@ -109,13 +109,14 @@ body.menu-open::after {
     color: var(--accent);
   }
 
+  /* Hamburger Icon Styling */
   .hamburger {
     display: flex;
     flex-direction: column;
-    cursor: pointer;
+    justify-content: space-between;
     width: 24px;
     height: 18px;
-    justify-content: space-between;
+    cursor: pointer;
   }
 
   .hamburger span {
@@ -125,7 +126,7 @@ body.menu-open::after {
     transition: all 0.4s ease;
   }
 
-  /* Change hamburger to X when active */
+  /* Turn hamburger into X when active */
   .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
   }
@@ -137,8 +138,11 @@ body.menu-open::after {
   .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
   }
-   nav .btn-ghost{width:auto;}
+  nav .btn-ghost{width:auto;}
 }
+
+   
+
 
  
 
@@ -469,6 +473,7 @@ body.menu-open::after {
 
 </body>
 </html>
+
 
 
 
