@@ -84,10 +84,13 @@ body.menu-open::after {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 2000;
+    padding: 1rem 1.2rem;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
-    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2000;
   }
 
   /* Hamburger Icon */
@@ -107,10 +110,9 @@ body.menu-open::after {
     width: 100%;
     background: var(--text);
     border-radius: 2px;
-    transition: all 0.35s ease;
+    transition: all 0.3s ease;
   }
 
-  /* Hamburger Active (turns into X) */
   .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 6px);
   }
@@ -121,25 +123,26 @@ body.menu-open::after {
     transform: rotate(-45deg) translate(5px, -6px);
   }
 
-  /* Fullscreen Nav Overlay */
+  /* Fullscreen Overlay Nav */
   nav {
     position: fixed;
     inset: 0;
+    height: 100vh;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.97);
+    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.8rem;
-    background: rgba(10, 10, 10, 0.97);
-    backdrop-filter: blur(10px);
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.45s ease;
-    z-index: 3000;
+    transition: all 0.4s ease;
+    z-index: 2500;
   }
 
-  /* Show menu */
   nav.show {
     transform: translateY(0);
     opacity: 1;
@@ -147,8 +150,8 @@ body.menu-open::after {
   }
 
   nav a {
-    color: var(--text);
     font-size: 20px;
+    color: var(--text);
     font-weight: 600;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -158,17 +161,18 @@ body.menu-open::after {
     color: var(--accent);
   }
 
-  /* Disable scroll when open */
   body.menu-open {
     overflow: hidden;
   }
-
   /* Optional: button inside menu */
   nav .btn-ghost {
     width: auto;
     padding: 10px 20px;
   }
+
 }
+
+  
 
   
 
@@ -247,26 +251,25 @@ body.menu-open::after {
 <body>
 
 <header>
-  <div class="wrap header-inner">
-    <div class="brand" aria-hidden="true">
-      <div class="logo"><a href="https://chetana-webdesigner.netlify.app/">CT</a></div>
-      <div>
-        <div style="font-size:15px">Chetana Tiwari</div>
-        <div style="font-size:12px;color:var(--muted)">Web Designer & Frontend Developer</div>
-      </div>
-    </div>
-
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-      <a class="btn btn-ghost" href="Chetana-Tiwari.pdf" download>Download Resume</a>
-    </nav>
-
-    <div class="hamburger" aria-hidden="true">☰</div>
+  <div class="logo">CT</div>
+  <div class="title">
+    <h2>Chetana Tiwari</h2>
+    <p>Web Designer & Frontend Developer</p>
   </div>
+
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
 <main class="wrap" id="top">
@@ -408,51 +411,107 @@ body.menu-open::after {
 </main>
 
 <script>
-  // Footer Year
+  // --- Footer Year ---
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  // GSAP Animations
+  // --- GSAP Animations ---
   window.addEventListener("load", function () {
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.from(".hero-left h1", { y: 20, opacity: 0, duration: 0.9, ease: "power3.out", delay: 0.2 });
-    gsap.from(".hero-left .lead", { y: 12, opacity: 0, duration: 0.9, ease: "power3.out", delay: 0.35 });
-    gsap.from(".ctas", { y: 12, opacity: 0, duration: 0.9, ease: "power3.out", delay: 0.5 });
-    gsap.from(".avatar", { scale: 0.85, opacity: 0, duration: 0.9, ease: "back.out(1.4)", delay: 0.6 });
+    // Hero entrance animations
+    gsap.from(".hero-left h1", {
+      y: 20,
+      opacity: 0,
+      duration: 0.9,
+      ease: "power3.out",
+      delay: 0.2
+    });
 
+    gsap.from(".hero-left .lead", {
+      y: 12,
+      opacity: 0,
+      duration: 0.9,
+      ease: "power3.out",
+      delay: 0.35
+    });
+
+    gsap.from(".ctas", {
+      y: 12,
+      opacity: 0,
+      duration: 0.9,
+      ease: "power3.out",
+      delay: 0.5
+    });
+
+    gsap.from(".avatar", {
+      scale: 0.85,
+      opacity: 0,
+      duration: 0.9,
+      ease: "back.out(1.4)",
+      delay: 0.6
+    });
+
+    // Fade in sections on scroll
     gsap.utils.toArray("section").forEach((sec) => {
       gsap.from(sec, {
         opacity: 0,
         y: 18,
         duration: 0.9,
         ease: "power3.out",
-        scrollTrigger: { trigger: sec, start: "top 80%" }
+        scrollTrigger: {
+          trigger: sec,
+          start: "top 80%",
+        },
       });
     });
 
-    gsap.to(".logo", { y: -4, repeat: -1, yoyo: true, duration: 3, ease: "sine.inOut", delay: 1.2 });
-  });
-
-  // Mobile Menu
- const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('nav');
-const body = document.body;
-
-if (hamburger && nav) {
-  hamburger.addEventListener('click', () => {
-    nav.classList.toggle('show');
-    hamburger.classList.toggle('active');
-    body.classList.toggle('menu-open');
-  });
-
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('show');
-      hamburger.classList.remove('active');
-      body.classList.remove('menu-open');
+    // Floating logo effect
+    gsap.to(".logo", {
+      y: -4,
+      repeat: -1,
+      yoyo: true,
+      duration: 3,
+      ease: "sine.inOut",
+      delay: 1.2,
     });
   });
+
+  // --- Mobile Menu (Enhanced with Animation) ---
+  const hamburger = document.querySelector(".hamburger");
+  const nav = document.querySelector("nav");
+  const body = document.body;
+
+  if (hamburger && nav) {
+    hamburger.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("show");
+      hamburger.classList.toggle("active");
+      body.classList.toggle("menu-open", isOpen);
+
+      if (isOpen) {
+        // Animate menu links when opening
+        gsap.fromTo(
+          "nav a",
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out",
+          }
+        );
+      }
+    });
+
+    // Close menu when clicking a link
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("show");
+        hamburger.classList.remove("active");
+        body.classList.remove("menu-open");
+      });
+    });
   }
 </script>
 
@@ -460,6 +519,7 @@ if (hamburger && nav) {
 
 </body>
 </html>
+
 
 
 
