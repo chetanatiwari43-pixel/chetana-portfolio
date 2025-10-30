@@ -257,9 +257,7 @@ nav a:hover {
   #experience .timeline .item .body{padding: 14px 0px;}
   #contact .card .btn-primary{margin-bottom:12px;}
 }
-@media (min-width: 320px) and (max-width: 469px) {
-.hero-left h1{font-size: 22px !important;}
-}
+
     /* Hero */
     .hero{
       display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;padding:48px 0;
@@ -274,7 +272,9 @@ nav a:hover {
     }
     .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#0b0b0b;box-shadow:0 8px 30px rgba(203,173,80,0.12)}
     .btn-ghost{background:transparent;border:1px solid #fff;color:var(--text)}
-
+    @media (min-width: 320px) and (max-width: 469px) {
+    .hero-left h1 {font-size: 22px !important;}
+    }
     /* Profile card */
     .card{
       background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
@@ -610,6 +610,7 @@ nav a:hover {
 
 </body>
 </html>
+
 
 
 
