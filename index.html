@@ -375,10 +375,13 @@ body.menu-open::after {
 
 <script>
   // --- Footer Year ---
-  document.getElementById('year').textContent = new Date().getFullYear();
+  const yearElement = document.getElementById('year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
 
   // --- GSAP Animations ---
-  window.addEventListener('load', function() {
+  window.addEventListener('load', function () {
     gsap.registerPlugin(ScrollTrigger);
 
     // Hero entrance
@@ -443,28 +446,30 @@ body.menu-open::after {
   });
 
   // --- Mobile Menu Toggle with Overlay Animation ---
- const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('nav');
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.querySelector('nav');
 
-if (hamburger && nav) {
-  hamburger.addEventListener('click', () => {
-    nav.classList.toggle('show');
-    hamburger.classList.toggle('active');
-  });
-
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('show');
-      hamburger.classList.remove('active');
+  if (hamburger && nav) {
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('show');
+      hamburger.classList.toggle('active');
     });
-  });
-}
+
+    // Close menu when clicking a link
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('show');
+        hamburger.classList.remove('active');
+      });
+    });
   }
 </script>
 
 
+
 </body>
 </html>
+
 
 
 
