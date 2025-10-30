@@ -65,31 +65,42 @@
     .hamburger{display:none;cursor:pointer}
       /* Mobile Navigation Fix */
 /* Improved Mobile Menu Look */
+/* Perfected Mobile Menu Overlay */
 @media (max-width: 820px) {
   nav {
     display: none;
     position: fixed;
     top: 64px;
-    right: 16px;
-    background: rgba(15, 15, 15, 0.96); /* strong dark overlay */
-    backdrop-filter: blur(12px); /* subtle blur for separation */
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 16px;
-    padding: 14px 0;
-    width: 220px;
+    right: 0;
+    left: 0;
+    background: rgba(10, 10, 10, 0.96); /* solid dark background */
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 16px 0;
     flex-direction: column;
-    align-items: flex-start;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
+    align-items: center;
+    text-align: center;
+    gap: 6px;
     z-index: 9999;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  nav.show {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
   }
 
   nav a {
     display: block;
     width: 100%;
-    padding: 12px 20px;
+    padding: 12px 0;
+    font-size: 16px;
     color: var(--text);
     font-weight: 600;
-    font-size: 15px;
     transition: background 0.25s, color 0.25s;
   }
 
@@ -102,7 +113,6 @@
     display: flex;
   }
 }
-
 
     /* Hero */
     .hero{
@@ -336,23 +346,49 @@
 </main>
 
 <script>
-  // small helpers
+  // --- Footer Year ---
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Simple GSAP animations
-  window.addEventListener('load', function(){
+  // --- GSAP Animations ---
+  window.addEventListener('load', function() {
     gsap.registerPlugin(ScrollTrigger);
 
     // Hero entrance
-    gsap.from('.hero-left h1', {y:20, opacity:0, duration:0.9, ease:'power3.out', delay:0.2});
-    gsap.from('.hero-left .lead', {y:12, opacity:0, duration:0.9, ease:'power3.out', delay:0.35});
-    gsap.from('.ctas', {y:12, opacity:0, duration:0.9, ease:'power3.out', delay:0.5});
+    gsap.from('.hero-left h1', {
+      y: 20,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      delay: 0.2
+    });
+
+    gsap.from('.hero-left .lead', {
+      y: 12,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      delay: 0.35
+    });
+
+    gsap.from('.ctas', {
+      y: 12,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      delay: 0.5
+    });
 
     // Profile card pop
-    gsap.from('.avatar', {scale:0.85, opacity:0, duration:0.9, ease:'back.out(1.4)', delay:0.6});
+    gsap.from('.avatar', {
+      scale: 0.85,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'back.out(1.4)',
+      delay: 0.6
+    });
 
-    // Fade in sections on scroll
-    gsap.utils.toArray('section').forEach((sec, i) => {
+    // Fade-in sections on scroll
+    gsap.utils.toArray('section').forEach((sec) => {
       gsap.from(sec, {
         opacity: 0,
         y: 18,
@@ -364,34 +400,48 @@
           start: 'top 80%',
           toggleActions: 'play none none none'
         }
-      })
+      });
     });
 
-    // subtle floating accent on logo
-    gsap.to('.logo', {y:-4, repeat:-1, yoyo:true, duration:3, ease:'sine.inOut', delay:1.2});
-  });
-
-  // Improved mobile nav toggle
-const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('nav');
-
-if (hamburger && nav) {
-  hamburger.addEventListener('click', () => {
-    const isOpen = nav.style.display === 'flex';
-    nav.style.display = isOpen ? 'none' : 'flex';
-  });
-
-  // Hide menu when a link is clicked
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.style.display = 'none';
+    // Subtle floating accent on logo
+    gsap.to('.logo', {
+      y: -4,
+      repeat: -1,
+      yoyo: true,
+      duration: 3,
+      ease: 'sine.inOut',
+      delay: 1.2
     });
   });
-  });
+
+  // --- Mobile Menu Toggle with Overlay Animation ---
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.querySelector('nav');
+
+  if (hamburger && nav) {
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('show');
+      hamburger.classList.toggle('active');
+
+      // Optional: Add background dimming effect
+      document.body.classList.toggle('menu-open');
+    });
+
+    // Close menu when a nav link is clicked
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('show');
+        hamburger.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      });
+    });
+  }
 </script>
+
 
 </body>
 </html>
+
 
 
 
