@@ -274,14 +274,15 @@ nav a:hover {
     .btn-ghost{background:transparent;border:1px solid #fff;color:var(--text)}
     @media (min-width: 320px) and (max-width: 469px) {
     .hero-left h1 {font-size: 22px !important;}
-    .hero-left div[style*="margin-top:22px"] {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+    .hero-left .contact-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
   }
-  .hero-left div[style*="margin-top:22px"] strong:first-child::after {
-    content: "";
+
+  .hero-left .contact-info strong:first-child::after {
+    content: "" !important;
   }
     }
     /* Profile card */
@@ -384,9 +385,10 @@ nav a:hover {
         <a class="btn btn-ghost" href="Chetana-Tiwari.pdf" download>Download Resume</a>
       </div>
 
-      <div style="margin-top:22px;color:var(--muted);font-size:14px">
-        <strong>Location:</strong> Ahmedabad • <strong>Email:</strong> <a href="mailto:chetanatiwari43@gmail.com" style="color:var(--text)">chetanatiwari43@gmail.com</a>
-      </div>
+      <div class="contact-info" style="margin-top:22px;color:var(--muted);font-size:14px">
+  <strong>Location:</strong> Ahmedabad • <strong>Email:</strong> 
+  <a href="mailto:chetanatiwari43@gmail.com" style="color:var(--text)">chetanatiwari43@gmail.com</a>
+</div>
     </div>
 
     <aside>
@@ -619,6 +621,7 @@ nav a:hover {
 
 </body>
 </html>
+
 
 
 
