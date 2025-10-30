@@ -64,30 +64,33 @@
     /* Mobile */
     .hamburger{display:none;cursor:pointer}
       /* Mobile Navigation Fix */
+/* Improved Mobile Menu Look */
 @media (max-width: 820px) {
   nav {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 64px;
-    right: 20px;
-    background: rgba(15, 15, 15, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 12px 0;
-    width: 200px;
+    right: 16px;
+    background: rgba(15, 15, 15, 0.96); /* strong dark overlay */
+    backdrop-filter: blur(12px); /* subtle blur for separation */
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 14px 0;
+    width: 220px;
     flex-direction: column;
     align-items: flex-start;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-    z-index: 999;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
+    z-index: 9999;
   }
 
   nav a {
     display: block;
     width: 100%;
-    padding: 10px 18px;
+    padding: 12px 20px;
     color: var(--text);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
+    transition: background 0.25s, color 0.25s;
   }
 
   nav a:hover {
@@ -96,13 +99,7 @@
   }
 
   .hamburger {
-    display: block;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 8px 12px;
-    color: var(--text);
-    background: none;
-    border: none;
+    display: flex;
   }
 }
 
@@ -395,5 +392,6 @@ if (hamburger && nav) {
 
 </body>
 </html>
+
 
 
