@@ -81,40 +81,7 @@ body.menu-open::after {
 /* ===== FINAL RESPONSIVE NAV FIX ===== */
 
 /* Desktop Default Navigation */
-@media (min-width: 821px) {
-  nav {
-    position: static;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 28px;
-    background: none;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
-  }
 
-  nav a {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--text);
-    transition: color 0.3s ease;
-  }
-
-  nav a:hover {
-    color: var(--accent);
-  }
-
-  /* Hide hamburger on desktop */
-  .hamburger {
-    display: none;
-  }
-
-  body.menu-open {
-    overflow: auto;
-  }
-}
 
 /* Mobile Menu (Full Screen Overlay) */
 @media (max-width: 820px) {
@@ -542,6 +509,7 @@ body.menu-open::after {
 
 </body>
 </html>
+
 
 
 
