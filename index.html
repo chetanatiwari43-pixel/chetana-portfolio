@@ -77,13 +77,20 @@ body.menu-open::after {
   backdrop-filter: blur(1px);
 }
 
-  /* ===== FINAL MOBILE MENU FIX ===== */
+ /* ===== FINAL POLISHED MOBILE MENU ===== */
 @media (max-width: 820px) {
   header {
-    position: relative;
-    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 1rem 1.2rem;
   }
 
+  /* Hamburger Icon */
   .hamburger {
     display: flex;
     flex-direction: column;
@@ -91,18 +98,19 @@ body.menu-open::after {
     width: 26px;
     height: 20px;
     cursor: pointer;
-    z-index: 2001; /* keeps on top */
+    z-index: 3001;
   }
 
   .hamburger span {
     display: block;
     height: 3px;
+    width: 100%;
     background: var(--text);
     border-radius: 2px;
-    transition: all 0.3s ease;
+    transition: all 0.35s ease;
   }
 
-  /* Turn hamburger into X */
+  /* Hamburger Active (turns into X) */
   .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 6px);
   }
@@ -113,34 +121,36 @@ body.menu-open::after {
     transform: rotate(-45deg) translate(5px, -6px);
   }
 
-  /* Fullscreen overlay menu */
+  /* Fullscreen Nav Overlay */
   nav {
     position: fixed;
     inset: 0;
-    background: rgba(10, 10, 10, 0.96);
-    backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 22px;
+    gap: 1.8rem;
+    background: rgba(10, 10, 10, 0.97);
+    backdrop-filter: blur(10px);
     transform: translateY(-100%);
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
     transition: all 0.45s ease;
-    z-index: 2000;
+    z-index: 3000;
   }
 
+  /* Show menu */
   nav.show {
     transform: translateY(0);
     opacity: 1;
-    pointer-events: auto;
+    visibility: visible;
   }
 
   nav a {
+    color: var(--text);
     font-size: 20px;
     font-weight: 600;
-    color: var(--text);
+    text-decoration: none;
     transition: color 0.3s ease;
   }
 
@@ -148,10 +158,16 @@ body.menu-open::after {
     color: var(--accent);
   }
 
+  /* Disable scroll when open */
   body.menu-open {
     overflow: hidden;
   }
-  nav .btn-ghost{width:auto;}
+
+  /* Optional: button inside menu */
+  nav .btn-ghost {
+    width: auto;
+    padding: 10px 20px;
+  }
 }
 
   
@@ -419,23 +435,24 @@ body.menu-open::after {
   });
 
   // Mobile Menu
-  const hamburger = document.querySelector(".hamburger");
-  const nav = document.querySelector("nav");
+ const hamburger = document.querySelector('.hamburger');
+const nav = document.querySelector('nav');
+const body = document.body;
 
-  if (hamburger && nav) {
-    hamburger.addEventListener("click", () => {
-      nav.classList.toggle("show");
-      hamburger.classList.toggle("active");
-      document.body.classList.toggle("menu-open");
-    });
+if (hamburger && nav) {
+  hamburger.addEventListener('click', () => {
+    nav.classList.toggle('show');
+    hamburger.classList.toggle('active');
+    body.classList.toggle('menu-open');
+  });
 
-    nav.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        nav.classList.remove("show");
-        hamburger.classList.remove("active");
-        document.body.classList.remove("menu-open");
-      });
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('show');
+      hamburger.classList.remove('active');
+      body.classList.remove('menu-open');
     });
+  });
   }
 </script>
 
@@ -443,6 +460,7 @@ body.menu-open::after {
 
 </body>
 </html>
+
 
 
 
